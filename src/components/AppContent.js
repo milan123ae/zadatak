@@ -1,15 +1,18 @@
 import React from 'react'
 import TaskItem from './TaskItem'
-import { useSelector } from 'react-redux';
-import {Modal, Button} from 'react-bootstrap';
+import { useDispatch, useSelector } from 'react-redux';
+import {Modal, Button, Form} from 'react-bootstrap';
+import { deleteTask } from '../slices/taskSlice';
+import { toast } from 'react-hot-toast';
 
 function AppContent() {
   const taskList = useSelector((state) => state.task.taskList);
-
+  const dispatch = useDispatch();
   const sortedTaskList = [...taskList];
 
   const handleDelete = () => {
-    console.log('deleting');
+    dispatch(deleteTask(taskList.id));
+    toast.success("success delete");
   };
 
   const handleUpdate = () => {
