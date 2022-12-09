@@ -20,7 +20,7 @@ export default AppHeader
 import React, {useState} from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Modal, Button, Form} from 'react-bootstrap';
-import { useDispatch } from "react-redux";
+import { useDispatch,} from "react-redux";
 import { addTask } from "../slices/taskSlice";
 import { v4 as uuid } from 'uuid';
 import toast from 'react-hot-toast';
@@ -36,7 +36,7 @@ export default function AppHeader() {
   const [description, setDescription] = useState('');
   const [priority, setPriority] = useState('');
   const dispatch = useDispatch();
-
+  //console.log(taskList);
   const handleSubmit = (e) => {
     e.preventDefault();
     if(title)
@@ -59,10 +59,8 @@ export default function AppHeader() {
     //console.log({title, status, data, description, priority});
   }
 
-
-
   return (
-    <>
+    <div>
       <Button className="mt-5 d-flex justify-content-center" onClick={handleShow}>
         Add Task
       </Button>
@@ -155,6 +153,6 @@ export default function AppHeader() {
         </Modal.Footer>
     
       </Modal>
-    </>
+    </div>
   );
 }

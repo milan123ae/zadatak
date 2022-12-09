@@ -6,7 +6,7 @@ const getInitialTask = () => {
   // if task list is not empty
   if (localTaskList) {
    // return JSON.parse(localTaskList);
-   return localTaskList.stringify();
+   return localTaskList;
   }
   window.localStorage.setItem('taskList', []);
   return [];
