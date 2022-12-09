@@ -1,22 +1,3 @@
-/*
-import React from 'react'
-import { Button } from 'react-bootstrap'
-import InfoModal from './InfoModal'
-import TaskModal from './TaskModal'
-
-function AppHeader() {
-  return (
-    <div className="mt-5 d-flex justify-content-center">
-        <Button variant="primary">Add Task</Button>
-        
-        
-    </div>
-  )
-}
-
-export default AppHeader
-*/
-
 import React, {useState} from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Modal, Button, Form} from 'react-bootstrap';
@@ -25,7 +6,7 @@ import { addTask } from "../slices/taskSlice";
 import { v4 as uuid } from 'uuid';
 import toast from 'react-hot-toast';
 
-export default function AppHeader() {
+export default function AppHeader(type) {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -36,9 +17,11 @@ export default function AppHeader() {
   const [description, setDescription] = useState('');
   const [priority, setPriority] = useState('');
   const dispatch = useDispatch();
+  const[updatemodalOpen, setupdatemodalopen] = useState(false);
   //console.log(taskList);
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (type ==='Add'){
     if(title)
     {
       dispatch(addTask({
@@ -53,16 +36,21 @@ export default function AppHeader() {
       );
       toast.success('Task added successfully');
       //setModalOpen(false);
-    } else {
+    } 
+    else {
       toast.error("empty data!");
     }
     //console.log({title, status, data, description, priority});
+  } 
+  if(type ==='update'){
+    console.log('updating task')
   }
+} 
 
   return (
     <div>
       <Button className="mt-5 d-flex justify-content-center" onClick={handleShow}>
-        Add Task
+        {type ==='update' ? 'Update' : 'Add'} Task
       </Button>
 
       <Modal className="mt-5 d-flex justify-content-center" show={show} onHide={handleClose} centered>
@@ -148,7 +136,7 @@ export default function AppHeader() {
             Close
           </Button>
           <Button type="submit" variant="primary" onClick={(e) => handleSubmit(e)}>
-            Add Task
+            {type === 'update' ? 'update' : 'Add'} Task
           </Button>
         </Modal.Footer>
     
